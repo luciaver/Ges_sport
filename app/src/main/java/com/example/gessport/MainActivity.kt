@@ -14,15 +14,25 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.gessport.ui.home.HomeScreen // Importación necesaria para HomeScreen
+import com.example.gessport.ui.admin.AdminPanelScreen
+import com.example.gessport.ui.backend.ges_user.AddUserScreen
+import com.example.gessport.ui.backend.ges_user.DeleteUserScreen
+import com.example.gessport.ui.backend.ges_user.EditUserScreen
+import com.example.gessport.ui.backend.ges_user.GesUserScreen
+import com.example.gessport.ui.backend.ges_user.SelectUserScreen
+import com.example.gessport.ui.home.HomeScreen
 import com.example.gessport.ui.login.LoginScreen
 import com.example.gessport.ui.theme.GesSportTheme
 
-// Define las rutas
 object Routes {
     const val Login = "login"
-    // MODIFICADO: Ahora Home incluye el argumento {nombre}
     const val Home = "home"
+    const val AdminPanel = "adminpanel"
+    const val GesUser = "gesuser"
+    const val AddUser = "adduser"
+    const val SelectUser = "selectuser"
+    const val EditUser = "edituser"
+    const val DeleteUser = "deleteuser"
 }
 
 class MainActivity : ComponentActivity() {
@@ -51,25 +61,62 @@ fun AppNavigation() {
         startDestination = Routes.Login,
         modifier = Modifier.fillMaxSize()
     ) {
-        // 1. Ruta para la pantalla de Login
+        // Pantalla de Login
         composable(Routes.Login) {
             LoginScreen(navController = navController)
         }
 
-        // 2. Ruta para la pantalla de Home (MODIFICADA)
+        // Pantalla de Home (para usuarios normales)
         composable(
-            route = "${Routes.Home}/{nombre}", // La ruta ahora espera el argumento
+            route = "${Routes.Home}/{nombre}",
             arguments = listOf(
                 navArgument("nombre") {
                     type = NavType.StringType
                 }
             )
         ) { backStackEntry ->
-            // Se extrae el argumento 'nombre' y se pasa al Composable HomeScreen
             HomeScreen(
                 navController = navController,
                 nombre = backStackEntry.arguments?.getString("nombre")
             )
+        }
+
+        // Pantalla de Panel de Administración (para admins)
+        composable(Routes.AdminPanel) {
+            AdminPanelScreen(navController = navController)
+        }
+
+        // Pantalla de Gestión de Usuarios
+        composable(Routes.GesUser) {
+            GesUserScreen(navController = navController)
+        }
+
+        // Pantalla de Añadir Usuario
+        composable(Routes.AddUser) {
+            AddUserScreen(navController = navController)
+        }
+
+        // Pantalla de Seleccionar Usuario para Modificar
+        composable(Routes.SelectUser) {
+            SelectUserScreen(navController = navController)
+        }
+
+        // Pantalla de Editar Usuario
+        composable(
+            route = "${Routes.EditUser}/{userId}",
+            arguments = listOf(
+                navArgument("userId") {
+                    type = NavType.IntType
+                }
+            )
+        ) { backStackEntry ->
+            val userId = backStackEntry.arguments?.getInt("userId") ?: 0
+            EditUserScreen(navController = navController, userId = userId)
+        }
+
+        // Pantalla de Eliminar Usuario
+        composable(Routes.DeleteUser) {
+            DeleteUserScreen(navController = navController)
         }
     }
 }

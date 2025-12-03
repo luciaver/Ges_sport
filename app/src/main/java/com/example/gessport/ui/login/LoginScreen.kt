@@ -38,7 +38,6 @@ fun LoginScreen(navController: NavHostController) {
     val purpleGradientStart = Color(0xFF8A2BE2)
     val blueGradientEnd = Color(0xFF4682B4)
 
-    //  borde lila brillante
     val glowingBorderBrush = remember {
         Brush.horizontalGradient(
             colors = listOf(purpleGradientStart.copy(alpha = 0.8f), purpleBorder, Color.White.copy(alpha = 0.5f))
@@ -76,20 +75,18 @@ fun LoginScreen(navController: NavHostController) {
                         fontSize = 50.sp,
                         fontWeight = FontWeight.Black
                     ),
-                    modifier = Modifier
-                        .align(Alignment.Center)
+                    modifier = Modifier.align(Alignment.Center)
                 )
             }
 
             Spacer(modifier = Modifier.height(48.dp))
 
-
+            // Campo Email
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp)
             ) {
-                // Etique del email
                 Text("Email", color = Color.White, fontWeight = FontWeight.SemiBold)
                 Spacer(modifier = Modifier.height(8.dp))
                 OutlinedTextField(
@@ -109,11 +106,7 @@ fun LoginScreen(navController: NavHostController) {
                     shape = RoundedCornerShape(8.dp),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .border(
-                            width = 2.dp,
-                            brush = glowingBorderBrush,
-                            shape = RoundedCornerShape(8.dp)
-                        )
+                        .border(2.dp, glowingBorderBrush, RoundedCornerShape(8.dp))
                 )
             }
 
@@ -145,11 +138,7 @@ fun LoginScreen(navController: NavHostController) {
                     shape = RoundedCornerShape(8.dp),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .border(
-                            width = 2.dp,
-                            brush = glowingBorderBrush,
-                            shape = RoundedCornerShape(8.dp)
-                        )
+                        .border(2.dp, glowingBorderBrush, RoundedCornerShape(8.dp))
                 )
             }
 
@@ -178,13 +167,19 @@ fun LoginScreen(navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            //lógica de login real
+            // Botón login con lógica para admin
             Button(
                 onClick = {
                     try {
                         val user = logic.comprobarLogin(email, password)
                         errorMessage = null
-                        navController.navigate("home/${user.nombre}")
+
+                        // Verificar si es admin
+                        if (user.rol.equals("admin", ignoreCase = true)) {
+                            navController.navigate("adminpanel")
+                        } else {
+                            navController.navigate("home/${user.nombre}")
+                        }
                     } catch (e: IllegalArgumentException) {
                         errorMessage = e.message
                     }
@@ -237,9 +232,7 @@ fun LoginScreen(navController: NavHostController) {
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
                     textDecoration = TextDecoration.Underline,
-                    modifier = Modifier.clickable {
-
-                    }
+                    modifier = Modifier.clickable { }
                 )
             }
 

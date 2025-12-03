@@ -55,6 +55,7 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore-ktx")
     //implementation(libs.firebase.firestore.ktx)
     implementation(libs.androidx.compose.foundation.layout)
+    implementation(libs.androidx.ui)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
