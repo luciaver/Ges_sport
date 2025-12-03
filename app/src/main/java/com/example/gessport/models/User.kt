@@ -1,9 +1,9 @@
 package com.example.gessport.models
 
-class User (
+data class User (
     val id: Int,
     val nombre: String,
-    val correoElectronico: String,
-    val contraseña: String,
+    val email: String,
+    val password: String,
     val rol: String
 )

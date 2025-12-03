@@ -11,7 +11,7 @@ class LogicLogin {
         }
 
         val user = RepositorioDeInicioDeSesion.obtenerUsuarios()
-            .find { it.correoElectronico.equals(email.trim(), ignoreCase = true) && it.contraseña == password }
+            .find { it.email.equals(email.trim(), ignoreCase = true) && it.password == password }
             ?: throw IllegalArgumentException("Email o contraseña incorrectos.")
 
         return user
