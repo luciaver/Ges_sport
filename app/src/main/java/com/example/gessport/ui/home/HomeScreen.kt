@@ -22,7 +22,7 @@ fun HomeScreen(navController: NavController, nombre: String?) {
     val purple = Color(0xFF8A2BE2)
     val blue = Color(0xFF4682B4)
 
-    // Gradiente para el botón 
+
     val buttonGradient = Brush.horizontalGradient(
         colors = listOf(purple, blue)
     )

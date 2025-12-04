@@ -167,14 +167,14 @@ fun LoginScreen(navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Botón login con lógica para admin
+            // Es el boton  lógica para admin
             Button(
                 onClick = {
                     try {
                         val user = logic.comprobarLogin(email, password)
                         errorMessage = null
 
-                        // Verificar si es admin
+                        // Verificar si es admin y si es pues te lleva al panel del admin
                         if (user.rol.equals("admin", ignoreCase = true)) {
                             navController.navigate("adminpanel")
                         } else {
@@ -223,7 +223,7 @@ fun LoginScreen(navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(48.dp))
 
-            // Enlace de registro
+            // Enlace de registro aunque no tengo el registro pero weno
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(text = "¿No tienes cuenta?", color = Color.White)
                 Spacer(modifier = Modifier.width(4.dp))

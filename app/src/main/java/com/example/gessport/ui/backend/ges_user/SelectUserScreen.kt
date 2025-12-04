@@ -23,7 +23,7 @@ import androidx.navigation.NavHostController
 import com.example.gessport.data.DataUserRepository
 import com.example.gessport.models.User
 
-@OptIn(ExperimentalMaterial3Api::class)
+@ExperimentalMaterial3Api
 @Composable
 fun SelectUserScreen(navController: NavHostController) {
     val viewModel: GesUserViewModel = viewModel(

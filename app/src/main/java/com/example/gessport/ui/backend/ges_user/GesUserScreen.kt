@@ -74,7 +74,7 @@ fun GesUserScreen(navController: NavHostController) {
                 .padding(paddingValues)
                 .padding(16.dp)
         ) {
-            // Filtros por rol
+            // Filtramos por los roles
             Text(
                 text = "Filtrar por rol:",
                 color = Color.Black,
@@ -119,7 +119,6 @@ fun GesUserScreen(navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Botones de acción
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)

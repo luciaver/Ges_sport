@@ -185,7 +185,7 @@ fun EditUserScreen(navController: NavHostController, userId: Int) {
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                // Selector de Rol
+                //Aqui seelccionamos el rol que va a tenr el nuevo usuario
                 Text(
                     "Selecciona el rol:",
                     color = Color.Black,

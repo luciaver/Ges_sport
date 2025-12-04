@@ -18,17 +18,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.gessport.R // Necesario para acceder a tus recursos (R.drawable.*)
+import com.example.gessport.R
 
 
 @Composable
 fun AdminPanelScreen(navController: NavController) {
     val redPrimary = Color(0xFFFF0000)
     val grayBackground = Color(0xFFE0E0E0)
-
-    // NOTA: Asegúrate de que los nombres de los archivos en R.drawable.* coincidan
-    // con los nombres reales en tu carpeta res/drawable.
-    // Usaremos Icons.Default.* para los que no tienen imagen cargada.
 
     Surface(
         color = grayBackground,
@@ -38,7 +34,7 @@ fun AdminPanelScreen(navController: NavController) {
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Cabecera roja
+            // L cabecera
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -56,58 +52,57 @@ fun AdminPanelScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Grid de opciones (3 columnas, 2 filas)
+
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 24.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                // Primera fila
+
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     AdminCard(
                         title = "Jugadores",
-                        iconVector = Icons.Default.Person, // Usa Vector Icon
+                        iconVector = Icons.Default.Person,
                         modifier = Modifier.weight(1f),
-                        onClick = { /* Navegar a jugadores */ }
+                        onClick = { /* Navegar a jugadoress jeje */ }
                     )
                     AdminCard(
                         title = "Equipos",
-                        iconDrawable = R.drawable.equipo, // Usa tu imagen 'equipo.png'
+                        iconDrawable = R.drawable.equipo,
                         modifier = Modifier.weight(1f),
                         onClick = { /* Navegar a equipos */ }
                     )
                     AdminCard(
                         title = "Partidos",
-                        iconDrawable = R.drawable.bal, // Usa Vector Icon
+                        iconDrawable = R.drawable.bal,
                         modifier = Modifier.weight(1f),
                         onClick = { /* Navegar a partidos */ }
                     )
                 }
 
-                // Segunda fila
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     AdminCard(
                         title = "Pistas",
-                        iconDrawable = R.drawable.campo, // Usa tu imagen 'campo.png'
+                        iconDrawable = R.drawable.campo,
                         modifier = Modifier.weight(1f),
                         onClick = { /* Navegar a pistas */ }
                     )
                     AdminCard(
                         title = "Reserva",
-                        iconDrawable = R.drawable.reserva, // Usa tu imagen 'reserva.png'
+                        iconDrawable = R.drawable.reserva,
                         modifier = Modifier.weight(1f),
                         onClick = { /* Navegar a reservas */ }
                     )
                     AdminCard(
                         title = "Usuarios",
-                        iconDrawable = R.drawable.bal, // Usa Vector Icon
+                        iconDrawable = R.drawable.bal,
                         modifier = Modifier.weight(1f),
                         onClick = { navController.navigate("gesuser") }
                     )
@@ -144,7 +139,6 @@ fun AdminCard(
     title: String,
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
-    // Acepta un ImageVector (Icono vectorial) o un Int (Recurso de imagen)
     iconVector: ImageVector? = null,
     iconDrawable: Int? = null
 ) {
@@ -165,13 +159,12 @@ fun AdminCard(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            // Lógica para mostrar Icono o Imagen
             when {
                 iconDrawable != null -> {
                     Image(
                         painter = painterResource(id = iconDrawable),
                         contentDescription = title,
-                        modifier = Modifier.size(48.dp) // Las imágenes suelen necesitar un tamaño un poco mayor
+                        modifier = Modifier.size(48.dp)
                     )
                 }
                 iconVector != null -> {
@@ -182,7 +175,7 @@ fun AdminCard(
                         modifier = Modifier.size(36.dp)
                     )
                 }
-                // Puedes añadir un caso por defecto o un error si ambos son null
+                
             }
 
             Spacer(modifier = Modifier.height(8.dp))
