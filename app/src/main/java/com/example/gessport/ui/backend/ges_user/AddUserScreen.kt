@@ -10,6 +10,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,12 +37,11 @@ fun AddUserScreen(navController: NavHostController) {
             }
         }
     )
-
-    var nombre by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var selectedRole by remember { mutableStateOf("JUGADOR") }
-    var errorMessage by remember { mutableStateOf<String?>(null) }
+     var nombre by rememberSaveable { mutableStateOf("") }
+    var  email by rememberSaveable { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
+    var selectedRole by rememberSaveable { mutableStateOf("JUGADOR") }
+    var errorMessage by rememberSaveable { mutableStateOf<String?>(null) }
 
     val redPrimary = Color(0xFFFF0000)
     val grayBackground = Color(0xFFE0E0E0)

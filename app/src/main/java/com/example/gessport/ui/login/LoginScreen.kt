@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -27,10 +28,10 @@ import com.example.gessport.domain.LogicLogin
 fun LoginScreen(navController: NavHostController) {
     val logic = remember { LogicLogin() }
 
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var errorMessage by remember { mutableStateOf<String?>(null) }
-    var rememberPassword by remember { mutableStateOf(false) }
+    var email by rememberSaveable { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
+    var errorMessage by rememberSaveable { mutableStateOf<String?>(null) }
+    var rememberPassword by rememberSaveable { mutableStateOf(false) }
 
     val primaryDark = Color(0xFF1E1E1E)
     val secondaryDark = Color(0xFF2C2C2C)
@@ -167,7 +168,7 @@ fun LoginScreen(navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Es el boton  lógica para admin
+            // Botón con lógica para admin
             Button(
                 onClick = {
                     try {
@@ -223,7 +224,7 @@ fun LoginScreen(navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(48.dp))
 
-            // Enlace de registro aunque no tengo el registro pero weno
+            // Enlace de registro
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(text = "¿No tienes cuenta?", color = Color.White)
                 Spacer(modifier = Modifier.width(4.dp))

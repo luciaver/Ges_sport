@@ -9,6 +9,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,12 +36,15 @@ fun DeleteUserScreen(navController: NavHostController) {
     )
 
     val users = viewModel.users
-    var showDialog by remember { mutableStateOf(false) }
-    var userToDelete by remember { mutableStateOf<User?>(null) }
+    var showDialog by rememberSaveable { mutableStateOf(false) }
+    var userIdToDelete by rememberSaveable { mutableStateOf<Int?>(null) }
 
     val redPrimary = Color(0xFFFF0000)
     val grayBackground = Color(0xFFE0E0E0)
     val whiteCard = Color(0xFFFFFFFF)
+
+
+    val userToDelete = users.find { it.id == userIdToDelete }
 
     Scaffold(
         containerColor = grayBackground,
@@ -103,7 +107,7 @@ fun DeleteUserScreen(navController: NavHostController) {
                             whiteCard = whiteCard,
                             redPrimary = redPrimary,
                             onDeleteClick = {
-                                userToDelete = user
+                                userIdToDelete = user.id
                                 showDialog = true
                             }
                         )
@@ -117,13 +121,13 @@ fun DeleteUserScreen(navController: NavHostController) {
             AlertDialog(
                 onDismissRequest = { showDialog = false },
                 title = { Text("Confirmar eliminación") },
-                text = { Text("¿Estás seguro de que deseas eliminar a ${userToDelete?.nombre}?") },
+                text = { Text("¿Estás seguro de que deseas eliminar a ${userToDelete.nombre}?") },
                 confirmButton = {
                     Button(
                         onClick = {
-                            userToDelete?.let { viewModel.deleteUser(it.id) }
+                            userIdToDelete?.let { viewModel.deleteUser(it) }
                             showDialog = false
-                            userToDelete = null
+                            userIdToDelete = null
                         },
                         colors = ButtonDefaults.buttonColors(containerColor = redPrimary)
                     ) {
@@ -131,7 +135,10 @@ fun DeleteUserScreen(navController: NavHostController) {
                     }
                 },
                 dismissButton = {
-                    TextButton(onClick = { showDialog = false }) {
+                    TextButton(onClick = {
+                        showDialog = false
+                        userIdToDelete = null
+                    }) {
                         Text("Cancelar")
                     }
                 }

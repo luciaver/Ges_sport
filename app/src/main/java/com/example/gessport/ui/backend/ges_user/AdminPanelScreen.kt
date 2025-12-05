@@ -1,4 +1,4 @@
-package com.example.gessport.ui.admin
+package com.example.gessport.ui.backend.ges_user
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -34,7 +34,7 @@ fun AdminPanelScreen(navController: NavController) {
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // L cabecera
+            // La cabecera
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -58,7 +58,10 @@ fun AdminPanelScreen(navController: NavController) {
                     .fillMaxWidth()
                     .padding(horizontal = 24.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
+
             ) {
+                // Primera fila de las tarjetas (Jugadores, Equipos, Partidos pero solo
+                // funciona el usuario porque los demas a un no)
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -68,19 +71,19 @@ fun AdminPanelScreen(navController: NavController) {
                         title = "Jugadores",
                         iconVector = Icons.Default.Person,
                         modifier = Modifier.weight(1f),
-                        onClick = { /* Navegar a jugadoress jeje */ }
+                        onClick = {  }
                     )
                     AdminCard(
                         title = "Equipos",
                         iconDrawable = R.drawable.equipo,
                         modifier = Modifier.weight(1f),
-                        onClick = { /* Navegar a equipos */ }
+                        onClick = { }
                     )
                     AdminCard(
                         title = "Partidos",
                         iconDrawable = R.drawable.bal,
                         modifier = Modifier.weight(1f),
-                        onClick = { /* Navegar a partidos */ }
+                        onClick = {  }
                     )
                 }
 
@@ -92,13 +95,13 @@ fun AdminPanelScreen(navController: NavController) {
                         title = "Pistas",
                         iconDrawable = R.drawable.campo,
                         modifier = Modifier.weight(1f),
-                        onClick = { /* Navegar a pistas */ }
+                        onClick = {  }
                     )
                     AdminCard(
                         title = "Reserva",
                         iconDrawable = R.drawable.reserva,
                         modifier = Modifier.weight(1f),
-                        onClick = { /* Navegar a reservas */ }
+                        onClick = {  }
                     )
                     AdminCard(
                         title = "Usuarios",
@@ -111,7 +114,7 @@ fun AdminPanelScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.weight(1f))
 
-            // Botón cerrar sesión
+            // el boton para cerrar sesion
             Button(
                 onClick = { navController.popBackStack() },
                 colors = ButtonDefaults.buttonColors(containerColor = redPrimary),
@@ -175,7 +178,7 @@ fun AdminCard(
                         modifier = Modifier.size(36.dp)
                     )
                 }
-                
+
             }
 
             Spacer(modifier = Modifier.height(8.dp))

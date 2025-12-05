@@ -8,6 +8,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,18 +42,22 @@ fun EditUserScreen(navController: NavHostController, userId: Int) {
 
     val userToEdit = viewModel.userToEdit
 
-    var nombre by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var selectedRole by remember { mutableStateOf("JUGADOR") }
-    var errorMessage by remember { mutableStateOf<String?>(null) }
+    var nombre by rememberSaveable { mutableStateOf("") }
+    var email by rememberSaveable { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
+    var selectedRole by rememberSaveable { mutableStateOf("JUGADOR") }
+    var errorMessage by rememberSaveable { mutableStateOf<String?>(null) }
+    var isInitialized by rememberSaveable { mutableStateOf(false) }
 
     LaunchedEffect(userToEdit) {
         userToEdit?.let {
-            nombre = it.nombre
-            email = it.email
-            password = it.password
-            selectedRole = it.rol
+            if (!isInitialized) {
+                nombre = it.nombre
+                email = it.email
+                password = it.password
+                selectedRole = it.rol
+                isInitialized = true
+            }
         }
     }
 
@@ -185,7 +190,7 @@ fun EditUserScreen(navController: NavHostController, userId: Int) {
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                //Aqui seelccionamos el rol que va a tenr el nuevo usuario
+                // Selector de rol
                 Text(
                     "Selecciona el rol:",
                     color = Color.Black,
